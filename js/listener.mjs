@@ -1,2 +1,3 @@
-function helloPizza () { console.log("Hello Pizza!"); };
-module.exports = helloPizza;
+function helloPizza () { console.log("Hello Pizza!"); }
+
+export default helloPizza;
