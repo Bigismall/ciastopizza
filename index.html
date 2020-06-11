@@ -42,8 +42,8 @@
   <dd>100%</dd>
   <dt>Woda</dt>
   <dd>65%</dd>
-  <dt>Drożdże suche/świeże</dt>
-  <dd>1% / 3%</dd>
+  <dt>Drożdże suche (świeże)</dt>
+  <dd>1% (3%)</dd>
   <dt>Sól</dt>
   <dd>2%</dd>
   <dt>Cukier</dt>
@@ -51,6 +51,61 @@
   <dt>Oliwa</dt>
   <dd>1%</dd>
 </dl>
+<h2>Kalkulator pizzy</h2>
+<form name="pizza-form"
+      id="pizza-form">
+  <fieldset>
+    <legend>Rodzaj pizzy</legend>
+    <input type="radio"
+           name="pizza-type"
+           id="pizza-type-neapolitan"
+           value="0"
+           checked>
+    <label for="pizza-type-neapolitan">Neapolitan</label>
+    <input type="radio"
+           name="pizza-type"
+           id="pizza-type-american"
+           value="1">
+    <label for="pizza-type-american">American</label>
+    <input type="radio"
+           name="pizza-type"
+           id="pizza-type-sicilian"
+           value="2">
+    <label for="pizza-type-sicilian">Sicilian</label>
+  </fieldset>
+  <fieldset>
+    <legend>Ilość pizzy</legend>
+    <label for="pizza-amount"
+           id="pizza-amount-label">1
+    </label>
+    <input type="range"
+           min="1"
+           max="8"
+           step="1"
+           value="1"
+           name="pizza-amount"
+           id="pizza-amount">
+  </fieldset>
+  <fieldset>
+    <legend>Składniki</legend>
+    <dl class="recipe">
+      <dt>Mąka</dt>
+      <dd id="ingredient-flour"></dd>
+      <dt>Woda</dt>
+      <dd id="ingredient-water"></dd>
+      <dt>Drożdże</dt>
+      <dd id="ingredient-yeast"></dd>
+      <dt>Cukier</dt>
+      <dd id="ingredient-sugar"></dd>
+      <dt>Sól</dt>
+      <dd id="ingredient-salt"></dd>
+      <dt>Oliwa</dt>
+      <dd id="ingredient-oil"></dd>
+    </dl>
+
+  </fieldset>
+
+</form>
 
 <h2>Rodzaje pizzy</h2>
 <blockquote cite="https://pl.wikipedia.org/wiki/Pizza">
@@ -83,9 +138,43 @@
   </dl>
 </blockquote>
 <script type="module">
-  import helloPizza from "./js/listener.js";
+  import calculatePizza from "./js/listener.js";
 
-  helloPizza();
+  function displayRecipe () {
+    const [flour, water, yeast, sugar, salt, oil] = calculatePizza($pizzaType.value, $pizzaAmount.value);
+
+    $ingredientFlour.innerHTML = flour;
+    $ingredientWater.innerHTML = water;
+    $ingredientYeast.innerHTML = yeast;
+    $ingredientSugar.innerHTML = sugar;
+    $ingredientSalt.innerHTML = salt;
+    $ingredientOil.innerHTML = oil;
+  }
+
+  const $pizzaForm = document.querySelector("#pizza-form");
+  const $pizzaType = document.querySelector("input[name=pizza-type]:checked");
+  const $pizzaAmount = document.querySelector("#pizza-amount");
+  const $pizzaAmountLabel = document.querySelector("#pizza-amount-label");
+
+  const $ingredientFlour = document.querySelector("#ingredient-flour");
+  const $ingredientWater = document.querySelector("#ingredient-water");
+  const $ingredientYeast = document.querySelector("#ingredient-yeast");
+  const $ingredientSugar = document.querySelector("#ingredient-sugar");
+  const $ingredientSalt = document.querySelector("#ingredient-salt");
+  const $ingredientOil = document.querySelector("#ingredient-oil");
+
+  if (!($pizzaForm && $pizzaType && $pizzaAmount && $pizzaAmountLabel && $ingredientFlour && $ingredientWater && $ingredientYeast && $ingredientSugar && $ingredientSalt && $ingredientOil)) {
+    throw "Missing input field";
+  }
+
+  $pizzaAmount.addEventListener("input", () => {
+    $pizzaAmountLabel.innerHTML = $pizzaAmount.value;
+  });
+
+  $pizzaForm.addEventListener("change", displayRecipe);
+
+  displayRecipe();
+
 </script>
 </body>
 </html>
