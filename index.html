@@ -2,13 +2,13 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8">
-  <title>Ciasto Pizza</title>
   <meta name="viewport"
         content="width=device-width, initial-scale=1">
   <meta name="description"
         content="Podstawowy przepis na ciasto do pizzy">
   <meta name="author"
         content="bigismall.com">
+  <title>Ciasto Pizza</title>
   <link rel="icon"
         type="image/png"
         sizes="32x32"
@@ -30,25 +30,6 @@
   <h2>Kalkulator pizzy</h2>
   <form name="pizza-form"
         id="pizza-form">
-    <fieldset>
-      <legend>Rodzaj pizzy</legend>
-      <input type="radio"
-             name="pizza-type"
-             id="pizza-type-neapolitan"
-             value="0"
-             checked>
-      <label for="pizza-type-neapolitan">Neapolitan</label>
-      <input type="radio"
-             name="pizza-type"
-             id="pizza-type-american"
-             value="1">
-      <label for="pizza-type-american">American</label>
-      <input type="radio"
-             name="pizza-type"
-             id="pizza-type-sicilian"
-             value="2">
-      <label for="pizza-type-sicilian">Sicilian</label>
-    </fieldset>
     <fieldset>
       <legend>Ilość pizzy</legend>
       <label for="pizza-amount"
@@ -87,7 +68,7 @@
     </fieldset>
   </form>
 </article>
-<hr/>
+<hr />
 <aside>
   <h2>Podstawowy przepis na ciasto do pizzy</h2>
   <dl class="recipe">
@@ -105,7 +86,7 @@
     <dd>1%</dd>
   </dl>
 </aside>
-<hr/>
+<hr />
 <article>
   <h2>Rodzaje pizzy</h2>
   <blockquote cite="https://pl.wikipedia.org/wiki/Pizza">
@@ -140,7 +121,7 @@
 </article>
 <script type="module">
 
-  function calculatePizza (type, amount) {
+  function calculatePizza (amount) {
     const hundredPercentFlour = 165;    //grams
     const flour = Math.ceil(hundredPercentFlour * amount);
     const water = Math.ceil(0.65 * flour);
@@ -153,10 +134,10 @@
   }
 
   function displayRecipe () {
-    const [flour, water, yeast, sugar, salt, oil] = calculatePizza($pizzaType.value, $pizzaAmount.value);
+    const [flour, water, yeast, sugar, salt, oil] = calculatePizza($pizzaAmount.value);
 
     $ingredientFlour.innerHTML = `${flour}g`;
-    $ingredientWater.innerHTML = `${water}g`;
+    $ingredientWater.innerHTML = `${water}ml`;
     $ingredientYeast.innerHTML = `${yeast}g`;
     $ingredientSugar.innerHTML = `${sugar}g`;
     $ingredientSalt.innerHTML = `${salt}g`;
@@ -164,7 +145,6 @@
   }
 
   const $pizzaForm = document.querySelector("#pizza-form");
-  const $pizzaType = document.querySelector("input[name=pizza-type]:checked");
   const $pizzaAmount = document.querySelector("#pizza-amount");
   const $pizzaAmountLabel = document.querySelector("#pizza-amount-label");
 
@@ -175,7 +155,7 @@
   const $ingredientSalt = document.querySelector("#ingredient-salt");
   const $ingredientOil = document.querySelector("#ingredient-oil");
 
-  if (!($pizzaForm && $pizzaType && $pizzaAmount && $pizzaAmountLabel && $ingredientFlour && $ingredientWater && $ingredientYeast && $ingredientSugar && $ingredientSalt && $ingredientOil)) {
+  if (!($pizzaForm && $pizzaAmount && $pizzaAmountLabel && $ingredientFlour && $ingredientWater && $ingredientYeast && $ingredientSugar && $ingredientSalt && $ingredientOil)) {
     throw "Missing input field";
   }
 
