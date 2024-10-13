@@ -7,9 +7,9 @@
   <meta name="description" content="Kalkulator ciasta na pizzę">
   <meta name="author" content="Bigismall">
   <title>Ciasto Pizza Kalkulator</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16x16.png">
-  <link rel="shortcut icon" href="/fav/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png">
+  <link rel="shortcut icon" href="fav/favicon.ico">
   <meta name="theme-color" content="#e3361c">
   <link rel="stylesheet" href="css/ciastopizza.css?v=1.1">
 </head>
@@ -69,8 +69,8 @@
   </aside>
   <script type="module">
     const $ = document.querySelector.bind(document);
-    const $html = (element, content) => {
-      $(element).innerHTML = content;
+    const $html = ($element, content) => {
+      $element.innerHTML = content;
     }
     const $pizzaForm = $("#pizza-form");
     const $pizzaAmount = $("#pizza-amount");
