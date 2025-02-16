@@ -72,49 +72,52 @@
     const $html = ($element, content) => {
       $element.innerHTML = content;
     }
-    const $pizzaForm = $("#pizza-form");
-    const $pizzaAmount = $("#pizza-amount");
-    const $pizzaAmountLabel = $("#pizza-amount-label");
-    const $ingredientFlour = $("#ingredient-flour");
-    const $ingredientWater = $("#ingredient-water");
-    const $ingredientYeast = $("#ingredient-yeast");
-    const $ingredientSugar = $("#ingredient-sugar");
-    const $ingredientSalt = $("#ingredient-salt");
-    const $ingredientOil = $("#ingredient-oil");
 
+    const $elements = new Map([
+      ['pizzaForm', $("#pizza-form")],
+      ['pizzaAmount', $("#pizza-amount")],
+      ['pizzaAmountLabel', $("#pizza-amount-label")],
+      ['ingredientFlour', $("#ingredient-flour")],
+      ['ingredientWater', $("#ingredient-water")],
+      ['ingredientYeast', $("#ingredient-yeast")],
+      ['ingredientSugar', $("#ingredient-sugar")],
+      ['ingredientSalt', $("#ingredient-salt")],
+      ['ingredientOil', $("#ingredient-oil")]
+    ]);
 
-    const calculatePizza = (amount) => {
-      const hundredPercentFlour = 165;    //grams
-      const flour = Math.ceil(hundredPercentFlour * amount);
-      const water = Math.ceil(0.65 * flour);
-      const yeast = Math.ceil(0.01 * flour);
-      const sugar = Math.ceil(0.02 * flour);
-      const salt = Math.ceil(0.02 * flour);
-      const oil = Math.ceil(0.01 * flour);   //1 milliliter of oil weighs 0.947 gram. -  I assume they are equal
-
-      return [flour, water, yeast, sugar, salt, oil];
-    }
-
-    const displayRecipe = () => {
-      const [flour, water, yeast, sugar, salt, oil] = calculatePizza($pizzaAmount.value);
-      $html($ingredientFlour, `${flour}g`);
-      $html($ingredientWater, `${water}ml`);
-      $html($ingredientYeast, `${yeast}g (${Math.ceil(yeast * 3)}g)`);
-      $html($ingredientSugar, `${sugar}g`);
-      $html($ingredientSalt, `${salt}g`);
-      $html($ingredientOil, `${oil}ml`);
-    }
-
-    if (!($pizzaForm && $pizzaAmount && $pizzaAmountLabel && $ingredientFlour && $ingredientWater && $ingredientYeast && $ingredientSugar && $ingredientSalt && $ingredientOil)) {
+    // Check that all required elements exist
+    if ([...$elements.values()].some(el => el === null)) {
       console.error("Missing input field");
       throw "Missing input field";
     }
 
-    $pizzaAmount.addEventListener("input", () => {
-      $html($pizzaAmountLabel, $pizzaAmount.value);
+    const calculatePizza = (amount) => {
+      const baseFlour = Math.ceil(165 * amount);  // base flour for one pizza * amount
+      return [
+        baseFlour,                    // flour
+        Math.ceil(baseFlour * 0.65),  // water
+        Math.ceil(baseFlour * 0.01),  // yeast
+        Math.ceil(baseFlour * 0.02),  // sugar
+        Math.ceil(baseFlour * 0.02),  // salt
+        Math.ceil(baseFlour * 0.01)   // oil
+      ];
+    }
+
+    const displayRecipe = () => {
+      const [flour, water, yeast, sugar, salt, oil] = calculatePizza($elements.get('pizzaAmount').value);
+      $html($elements.get('ingredientFlour'), `${flour}g`);
+      $html($elements.get('ingredientWater'), `${water}ml`);
+      $html($elements.get('ingredientYeast'), `${yeast}g (${Math.ceil(yeast * 3)}g)`);
+      $html($elements.get('ingredientSugar'), `${sugar}g`);
+      $html($elements.get('ingredientSalt'), `${salt}g`);
+      $html($elements.get('ingredientOil'), `${oil}ml`);
+    }
+
+    $elements.get('pizzaAmount').addEventListener("input", () => {
+      $html($elements.get('pizzaAmountLabel'), $elements.get('pizzaAmount').value);
     });
 
-    $pizzaForm.addEventListener("input", displayRecipe);
+    $elements.get('pizzaForm').addEventListener("input", displayRecipe);
 
     displayRecipe();
 
