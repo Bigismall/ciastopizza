@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kalkulator ciasta na pizzę">
+  <meta name="description" content="Pizza Dough Calculator">
   <meta name="author" content="Bigismall">
-  <title>Ciasto Pizza Kalkulator</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png">
-  <link rel="shortcut icon" href="fav/favicon.ico">
+  <title>Pizza Dough Calculator</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../fav/favicon-16x16.png">
+  <link rel="shortcut icon" href="../fav/favicon.ico">
   <meta name="theme-color" content="#e3361c">
-  <link rel="stylesheet" href="css/ciastopizza.css?v=1.1">
+  <link rel="stylesheet" href="../css/ciastopizza.css?v=1.1">
   <script>
-    // Przekierowanie na angielską wersję jeśli język przeglądarki jest inny niż polski
+    // Redirect to Polish version if browser language is Polish
     (function() {
       const userLang = navigator.language || navigator.userLanguage;
-      if (!userLang.startsWith('pl')) {
-        window.location.href = 'en/index.html';
+      if (userLang.startsWith('pl')) {
+        window.location.href = '../index.html';
       }
     })();
   </script>
@@ -25,33 +25,33 @@
 
 <body>
   <article>
-    <h2>Kalkulator pizzy</h2>
+    <h2>Pizza Calculator</h2>
     <form name="pizza-form" id="pizza-form">
       <fieldset>
-        <legend>Ilość pizzy</legend>
+        <legend>Number of Pizzas</legend>
         <label for="pizza-amount" id="pizza-amount-label">1
         </label>
         <input type="range" min="1" max="10" step="1" value="1" name="pizza-amount" id="pizza-amount">
       </fieldset>
       <fieldset>
-        <legend>Składniki</legend>
+        <legend>Ingredients</legend>
         <ul class="ingredient">
-          <li class="ingredient__item">Mąka
+          <li class="ingredient__item">Flour
             <div id="ingredient-flour"></div>
           </li>
-          <li class="ingredient__item">Woda
+          <li class="ingredient__item">Water
             <div id="ingredient-water"></div>
           </li>
-          <li class="ingredient__item">Drożdże
+          <li class="ingredient__item">Yeast
             <div id="ingredient-yeast"></div>
           </li>
-          <li class="ingredient__item">Cukier
+          <li class="ingredient__item">Sugar
             <div id="ingredient-sugar"></div>
           </li>
-          <li class="ingredient__item">Sól
+          <li class="ingredient__item">Salt
             <div id="ingredient-salt"></div>
           </li>
-          <li class="ingredient__item">Oliwa
+          <li class="ingredient__item">Oil
             <div id="ingredient-oil"></div>
           </li>
         </ul>
@@ -60,19 +60,19 @@
   </article>
   <hr />
   <aside>
-    <h2>Podstawowy przepis na ciasto do pizzy</h2>
+    <h2>Basic Pizza Dough Recipe</h2>
     <dl class="recipe">
-      <dt>Mąka</dt>
+      <dt>Flour</dt>
       <dd>100%</dd>
-      <dt>Woda</dt>
+      <dt>Water</dt>
       <dd>65%</dd>
-      <dt>Drożdże suche (świeże)</dt>
+      <dt>Dry Yeast (Fresh)</dt>
       <dd>1% (3%)</dd>
-      <dt>Sól</dt>
+      <dt>Salt</dt>
       <dd>2%</dd>
-      <dt>Cukier</dt>
+      <dt>Sugar</dt>
       <dd>2%</dd>
-      <dt>Oliwa</dt>
+      <dt>Oil</dt>
       <dd>1%</dd>
     </dl>
   </aside>
